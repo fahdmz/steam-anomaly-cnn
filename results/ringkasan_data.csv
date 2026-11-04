@@ -1,0 +1,8 @@
+game,mulai,akhir,jumlah_hari,hari_hilang,diisi_interpolasi,tetap_kosong,median_pemain,jumlah_segmen,segmen_ada_lonjakan_asli,persen_lonjakan_asli
+Dark Souls 3,2016-04-12,2025-06-20,3357,0,0,0,9546.0,167,17,10.2
+Euro Truck Simulator 2,2013-01-01,2025-06-20,4554,110,1,109,29242.0,220,18,8.2
+Garry's Mod,2012-01-01,2025-06-20,4920,25,4,21,35501.0,244,17,7.0
+Rainbow Six Siege,2015-12-01,2025-06-20,3490,0,0,0,71573.0,174,9,5.2
+Stardew Valley,2016-02-26,2025-06-20,3403,0,0,0,27131.0,170,13,7.6
+Terraria,2011-05-15,2025-06-20,5151,52,1,51,26767.0,254,51,20.1
+Total,,,24875,187,6,181,,1229,125,10.2
