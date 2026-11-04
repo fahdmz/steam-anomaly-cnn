@@ -1,0 +1,13 @@
+encoding,persen_seragam_normal,persen_seragam_anomali
+MTF Uniform 2,0.0,0.0
+MTF Uniform 4,0.0,0.0
+MTF Uniform 5,0.0,0.0
+MTF Uniform 10,0.0,0.0
+MTF Quantile 2,0.0,0.0
+MTF Quantile 4,0.0,0.0
+MTF Quantile 5,0.0,0.0
+MTF Quantile 10,0.0,0.0
+MTF Normal 2,66.8,19.0
+MTF Normal 4,31.2,6.7
+MTF Normal 5,22.7,5.4
+MTF Normal 10,8.5,2.5

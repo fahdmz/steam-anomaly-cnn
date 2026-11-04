@@ -1,0 +1,15 @@
+encoding,matriks_detik,gambar_detik,total_detik
+GADF,0.003,0.192,0.194
+GASF,0.003,0.175,0.178
+MTF Uniform 2,0.003,0.181,0.184
+MTF Uniform 4,0.003,0.178,0.181
+MTF Uniform 5,0.003,0.176,0.18
+MTF Uniform 10,0.004,0.177,0.181
+MTF Quantile 2,0.004,0.178,0.181
+MTF Quantile 4,0.005,0.183,0.187
+MTF Quantile 5,0.005,0.212,0.217
+MTF Quantile 10,0.009,0.225,0.234
+MTF Normal 2,0.003,0.187,0.19
+MTF Normal 4,0.003,0.177,0.181
+MTF Normal 5,0.003,0.177,0.181
+MTF Normal 10,0.006,0.179,0.185
