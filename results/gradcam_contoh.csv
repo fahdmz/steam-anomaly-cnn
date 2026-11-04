@@ -1,0 +1,4 @@
+jenis,gambar_id,segmen_id,game,tanggal_mulai,prob_anomali,hari_disuntik,hari_teratas_gradcam
+Benar,1380,151,dark_souls_3,2024-07-19,1.0,"[10, 19]","[19, 20]"
+Benar,1529,300,ets2,2020-08-30,1.0,"[5, 6, 17]","[5, 6, 17]"
+Salah,1630,401,garrys_mod,2012-10-07,0.033,[4],[3]
