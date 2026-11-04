@@ -1,0 +1,5 @@
+encoding,persen_seragam_segmen_normal,persen_seragam_segmen_anomali,gambar_seragam_di_test,dari_itu_normal,akurasi_pada_seragam,akurasi_pada_tidak_seragam,akurasi_test_total,batas_atas_akurasi
+MTF Normal 2,66.8,19.0,149,120,80.5,74.2,76.8,92.2
+MTF Normal 4,31.2,6.7,59,51,86.4,79.4,80.5,97.8
+MTF Normal 5,22.7,5.4,50,43,86.0,78.4,79.5,98.1
+MTF Normal 10,8.5,2.5,18,14,77.8,75.3,75.4,98.9
