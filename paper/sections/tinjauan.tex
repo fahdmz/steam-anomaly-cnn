@@ -1,0 +1,17 @@
+\section{Tinjauan Pustaka}
+
+\subsection{Gramian Angular Field}
+GAF mengubah time series $X=(x_1,\dots,x_n)$ menjadi matriks $n \times n$~\cite{wang2015}. Data terlebih dahulu diskalakan ke rentang $[-1,1]$, lalu tiap nilai diubah menjadi sudut $\phi_i=\arccos(\tilde{x}_i)$. Gramian Angular Summation Field (GASF) dan Gramian Angular Difference Field (GADF) didefinisikan sebagai
+\begin{equation}
+\mathrm{GASF}_{ij}=\cos(\phi_i+\phi_j), \qquad \mathrm{GADF}_{ij}=\sin(\phi_i-\phi_j).
+\end{equation}
+Setiap piksel $(i,j)$ menggambarkan hubungan antara titik waktu ke-$i$ dan ke-$j$, sehingga satu titik yang berubah akan mengubah satu baris dan satu kolom pada gambar.
+
+\subsection{Markov Transition Field}
+MTF membagi nilai time series ke dalam $Q$ kelompok (bin), menghitung peluang perpindahan dari satu bin ke bin lain pada titik waktu berurutan, lalu menyusun matriks $n\times n$ dengan $M_{ij}=w_{q(i)\,q(j)}$, yaitu peluang transisi antara bin titik ke-$i$ dan bin titik ke-$j$~\cite{wang2015}. Pustaka pyts~\cite{faouzi2020} menyediakan tiga cara pembagian bin: \textit{uniform} (lebar bin sama), \textit{quantile} (jumlah titik per bin sama), dan \textit{normal} (batas bin mengikuti kuantil distribusi normal baku).
+
+\subsection{CNN dan Grad-CAM}
+CNN mengenali pola pada gambar melalui lapisan konvolusi, pooling, dan lapisan terhubung penuh. Grad-CAM~\cite{selvaraju2017} menjelaskan keputusan CNN dengan menghitung bobot tiap peta fitur pada lapisan konvolusi terakhir dari rata-rata gradien keluaran terhadap peta fitur tersebut, lalu menjumlahkan peta fitur dengan bobot itu dan membuang nilai negatif. Hasilnya adalah peta panas yang menunjukkan area gambar yang paling mendorong keputusan.
+
+\subsection{Statistik Matriks dan Korelasi Pearson}
+Rahadian dkk.~\cite{rahadian2023} menghitung rata-rata (mean), simpangan baku (SD), dan jumlah nilai unik (count) dari setiap matriks hasil encoding. Nilai-nilai ini dirata-ratakan untuk seluruh data normal dan seluruh data anomali, lalu selisih absolutnya disebut \dmean, \dsd, dan \dcount. Kekuatan hubungan antara tiap selisih dan akurasi CNN diukur dengan koefisien korelasi Pearson $r$, yang bernilai antara $-1$ dan $1$.

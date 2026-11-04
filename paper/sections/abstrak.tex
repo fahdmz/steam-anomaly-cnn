@@ -1,0 +1,7 @@
+\begin{abstract}
+Jumlah pemain harian sebuah game adalah data time series nyata yang naik turun karena tren jangka panjang, pola mingguan, dan lonjakan sesaat. Penelitian ini menerapkan metode Rahadian dkk. pada data jumlah pemain harian enam game Steam untuk mendeteksi anomali dengan mengubah segmen 20 hari menjadi gambar memakai 14 jenis image encoding (GADF, GASF, dan 12 varian MTF), lalu mengklasifikasikannya dengan convolutional neural network (CNN). Anomali dibuat dengan melipatgandakan atau membagi jumlah pemain pada 1 sampai 5 hari acak. Hasilnya, GADF dan GASF memberikan akurasi test tertinggi (97,8\% dan 97,3\%), sedangkan MTF Quantile paling rendah (56,5\% sampai 70,8\%). Visualisasi Grad-CAM menunjukkan bahwa pada segmen yang terdeteksi benar, CNN memperhatikan garis silang pada gambar GADF yang bersesuaian dengan hari anomali. Korelasi Pearson antara selisih simpangan baku matriks (\dsd) dan akurasi hanya 0,507, lebih lemah daripada 0,944 pada paper acuan, sehingga pada data ini pemilihan encoding cukup dari statistik matriks kurang dapat diandalkan. Data juga memperlihatkan pola mingguan yang konsisten: jumlah pemain pada Sabtu dan Minggu lebih tinggi daripada hari kerja di keenam game.
+\end{abstract}
+
+\begin{IEEEkeywords}
+time series, deteksi anomali, Gramian Angular Field, Markov Transition Field, CNN, Grad-CAM
+\end{IEEEkeywords}

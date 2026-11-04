@@ -1,0 +1,15 @@
+\section{Insight}
+
+Bagian ini merangkum pelajaran yang dapat diambil dari hasil di atas.
+
+\textbf{Akhir pekan adalah ritme dasar jumlah pemain.} Pola Sabtu dan Minggu yang lebih ramai muncul di keenam game, padahal genre dan usia game-nya sangat berbeda. Artinya, pola ini lebih ditentukan oleh waktu luang pemain daripada oleh jenis game. Bagi deteksi anomali, hal ini berarti segmen normal pun tidak datar, karena satu segmen 20 hari selalu memuat hampir tiga siklus mingguan. Sebuah metode harus mampu membedakan naik turun mingguan yang wajar dari perubahan yang benar-benar tidak biasa.
+
+\textbf{GAF unggul karena satu hari anomali menjadi pola yang mudah dilihat.} Pada GAF, satu hari yang berubah memengaruhi seluruh baris dan kolom hari tersebut, sehingga anomali yang hanya terjadi satu hari berubah menjadi garis silang yang membentang di seluruh gambar. Pola seperti ini mudah dikenali oleh CNN. Grad-CAM memperlihatkan bahwa pada contoh yang benar CNN memang memperhatikan garis tersebut, dan karena posisi garis bersesuaian dengan nomor hari, keputusan CNN dapat dipetakan kembali ke tanggal pada data aslinya.
+
+\textbf{Encoding perlu menjaga informasi yang membedakan anomali.} Anomali pada penelitian ini adalah perubahan besar dalam jumlah pemain. MTF Quantile hanya melihat urutan nilai, sehingga lonjakan dua kali lipat dan lima kali lipat dapat menghasilkan gambar yang sama. Encoding yang mempertahankan besarnya nilai, seperti GAF dan MTF Uniform, lebih cocok untuk jenis anomali ini.
+
+\textbf{Akurasi yang tinggi belum tentu berarti CNN memahami pola.} Standarisasi data membuat MTF Normal tidak lagi menghasilkan gambar merah polos untuk semua segmen, sehingga hasilnya berbeda dari paper acuan karena perbedaan pra-pemrosesan data. Namun, sebagian akurasinya berasal dari jalan pintas: CNN menebak ``normal'' untuk setiap gambar polos. Hal ini menunjukkan pentingnya memeriksa isi gambar dan cara model mengambil keputusan, bukan hanya melihat angka akurasi.
+
+\textbf{Pemilihan encoding lewat statistik matriks perlu disesuaikan dengan karakter data.} Pada data tegangan di paper acuan, \dsd{} sangat kuat menunjukkan encoding yang baik~\cite{rahadian2023}. Pada data jumlah pemain, hubungannya jauh lebih lemah. Data kami memiliki nilai harian yang hampir tidak pernah berulang dan anomali yang dapat naik maupun turun, sehingga statistik matriks berperilaku berbeda. Statistik matriks tetap berguna sebagai penyaring awal, misalnya untuk menyingkirkan encoding yang semua selisihnya kecil, tetapi pada data seperti ini hasilnya sebaiknya tetap dipastikan dengan percobaan CNN.
+
+\textbf{Data nyata sudah mengandung lonjakan yang mirip anomali.} Sekitar sepersepuluh segmen normal, dan seperlima segmen Terraria, sudah memuat lonjakan alami. Anomali buatan yang besarnya mirip dengan variasi alami sulit dikenali, seperti pada contoh Garry's Mod yang salah diklasifikasi. Dengan kata lain, apa yang disebut ``normal'' pada data jumlah pemain tidak selalu tenang, dan label anomali buatan tidak dapat menangkap semua kejadian yang sebenarnya tidak biasa.

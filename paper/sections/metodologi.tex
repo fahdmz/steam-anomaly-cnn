@@ -1,0 +1,22 @@
+\section{Metodologi}
+
+\subsection{Data dan Pembersihan}
+Data yang dipakai adalah jumlah pemain bersamaan (concurrent players) harian dari enam game Steam, yaitu Dark Souls 3, Euro Truck Simulator 2 (ETS2), Garry's Mod, Rainbow Six Siege, Stardew Valley, dan Terraria. Data diambil dari repositori Steam-Game-Analytics~\cite{steamrepo} yang bersumber dari SteamDB~\cite{steamdb}. Sebagian besar data tersedia per hari, kecuali sekitar satu bulan terakhir yang tersedia dalam interval 1 jam dan 10 menit. Bagian tersebut diseragamkan menjadi data harian dengan mengambil nilai maksimum setiap hari.
+
+Beberapa langkah pembersihan dilakukan. Hari terakhir dibuang karena datanya belum lengkap. Nilai 1 sampai 3 pemain sebelum game dirilis dibuang dengan memulai data dari hari pertama yang memiliki minimal 1.000 pemain, sedangkan Garry's Mod dimulai dari 1 Januari 2012 karena data sebelumnya banyak yang hilang. Tanggal kosong hanya diisi dengan interpolasi linear jika celahnya paling lama tiga hari. Setelah pembersihan diperoleh 24.875 hari data. Dari 187 hari yang kosong, 6 hari diisi interpolasi dan 181 hari dibiarkan kosong.
+
+\subsection{Segmentasi dan Anomali Buatan}
+Setiap game dipotong menjadi segmen 20 hari yang tidak saling tumpang tindih, mengikuti panjang segmen pada paper acuan~\cite{rahadian2023}. Segmen yang masih mengandung hari kosong dilewati. Hasilnya adalah 1.229 segmen normal, terdiri atas 167 (Dark Souls 3), 220 (ETS2), 244 (Garry's Mod), 174 (Rainbow Six Siege), 170 (Stardew Valley), dan 254 (Terraria).
+
+Data asli tidak memiliki label anomali, sehingga anomali dibuat seperti pada paper acuan. Untuk setiap segmen normal dibuat satu salinan anomali dengan memilih 1 sampai 5 hari secara acak. Jumlah pemain pada hari terpilih dikalikan dengan faktor acak antara 2 dan 5 (lonjakan) atau dibagi dengan faktor yang sama (penurunan), dengan arah yang dipilih acak untuk setiap hari. Suntikan dilakukan pada jumlah pemain asli. Setelah itu seluruh data diubah ke skala $\log_{10}$ dan distandarisasi per game, karena skala tiap game sangat berbeda.
+
+Data dibagi menjadi 70\% train, 15\% validasi, dan 15\% test dengan seed tetap. Pembagian dilakukan per pasangan, sehingga segmen normal dan salinan anomalinya selalu berada di bagian yang sama. Rata-rata dan simpangan baku untuk standarisasi hanya dihitung dari segmen normal pada data train. Hasilnya adalah 860 pasangan train, 184 pasangan validasi, dan 185 pasangan test, atau 1.720, 368, dan 370 gambar.
+
+\subsection{Image Encoding}
+Setiap segmen diubah menjadi matriks $20\times20$ dengan 14 encoding dari pustaka pyts~\cite{faouzi2020}, yaitu GADF, GASF, serta MTF dengan strategi uniform, quantile, dan normal, masing-masing dengan 2, 4, 5, dan 10 bin. Parameter lain dibiarkan pada nilai bawaan seperti pada paper acuan. Matriks diubah menjadi gambar berwarna dengan colormap \textit{rainbow}, rentang warna $[-1,1]$ untuk GAF dan $[0,1]$ untuk MTF, lalu diperbesar menjadi $150\times150$ piksel.
+
+\subsection{CNN}
+Arsitektur CNN mengikuti paper acuan~\cite{rahadian2023}: tiga blok konvolusi dengan 16, 32, dan 64 filter berukuran $3\times3$, aktivasi ReLU, dan max pooling, diikuti lapisan dense 512 unit dan satu unit keluaran sigmoid. Model dilatih dengan optimizer RMSprop (learning rate 0,001), loss binary cross-entropy, batch 20, dan 20 epoch. Satu model dilatih untuk setiap encoding dengan pengaturan dan seed yang sama, tanpa penyesuaian khusus per encoding. Implementasi memakai PyTorch, dan model setelah epoch ke-20 yang dievaluasi pada data test.
+
+\subsection{Analisis}
+Nilai \dmean, \dsd, dan \dcount{} dihitung dari seluruh 1.229 pasangan segmen, lalu dikorelasikan dengan akurasi test CNN memakai korelasi Pearson pada 14 titik (satu per encoding). Grad-CAM diterapkan pada model dengan akurasi test tertinggi untuk beberapa segmen anomali pada data test. Peta panas dikembalikan ke ukuran matriks $20\times20$, lalu skor tiap hari dihitung sebagai jumlah nilai pada baris dan kolom hari tersebut.
